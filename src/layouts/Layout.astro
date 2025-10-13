@@ -1,0 +1,24 @@
+---
+export interface Props { title: string }
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <style is:global>
+      @import "../styles/global.css";
+    </style>
+    <script>
+  (function(){
+    const k='theme', m=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+    document.documentElement.dataset.theme=localStorage.getItem(k)||m;
+  })();
+</script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

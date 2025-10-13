@@ -1,16 +1,77 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import FixedNavbar from '../components/FixedNavbar.astro';
+const skills = ["Flutter", "Dart", "Firebase", "Supabase", "Java", "Android Studio", "C++", "Python"];
+const projects = [
+  {
+    title: "Todo List App",
+    body: "Cross-platform task manager with drag-&-drop, local JSON persistence and Material You.",
+    tags: ["Flutter", "Dart", "Android"],
+  },
+  {
+    title: "QR Stock ",
+    body: "Cross-platform app warehouse manager",
+    tags: ["Flutter", "Dart","API", "Firebase"],
+  },
+  {
+    title: "Simulador Mazmorra",
+    body: "Recreates turn-based combat between a group of characters and dungeon monsters.",
+    tags: ["Java"],
+  },
+  {
+    title: "FoodZone",
+    body: "Online store web application.",
+    tags: ["Flask", "Python", "JavaScript", "HTML", "CSS"],
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Manuel Guerrero — Dev">
+  <FixedNavbar sections={[
+    { title: 'Home', id: 'home' },
+    { title: 'About', id: 'about' },
+    { title: 'Projects', id: 'projects' }
+  ]} />
+
+  <header id="home">
+    <img
+      src="src/me.jpg"
+      alt="Manuel"
+      width="130"
+      height="150"
+      style="border-radius:50%;object-fit:cover;"
+    />
+    <h1>Manuel Guerrero Sedeño</h1>
+    <p>Cross-platform Developer • Ceuta, Spain</p>
+    <section id="skills" style="margin-top: 0.25rem;">
+      <div class="skill-row">
+        {skills.map((s) => <span class="skill-chip">{s}</span>)}
+      </div>
+    </section>
+  </header>
+
+  <section id="about">
+    <h2>About me</h2>
+    <p>
+      I’m 24, finishing my <strong>Higher Technician in Multi-Platform App Development</strong> and I’ve already shipped production Android apps using Flutter, Firebase & Supabase. Self-learner, team player and always looking for the next challenge.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="grid">
+      {
+        projects.map((p) => (
+          <Card title={p.title} body={p.body} tags={p.tags} />
+        ))
+      }
+    </div>
+  </section>
+
+  <footer id="contact">
+    <a href="https://github.com/Drooliito " target="_blank" rel="noopener">GitHub</a> •
+    <a href="https://www.linkedin.com/in/manuel-guerrero-sede%C3%B1o-4769672b8/ " target="_blank" rel="noopener">LinkedIn</a> •
+    <a href="https://linkedin.com/in/YOUR_LINKEDIN " target="_blank" rel="noopener">CV</a>
+  </footer>
+</Layout>

@@ -1,0 +1,14 @@
+---
+// Card.astro
+export interface Props { title: string; body: string; tags?: string[] }
+const { title, body, tags = [] } = Astro.props;
+---
+<div class="card">
+  <h3>{title}</h3>
+  <p>{body}</p>
+  {tags.length > 0 && (
+    <p style="margin-top:1rem;font-size:.8rem;">
+      {tags.map(t => <span class="tag">{t}</span>)}
+    </p>
+  )}
+</div>
