@@ -1,0 +1,64 @@
+---
+import LinkInline from "./LinkInline.astro";
+
+interface Props {
+  title: string;
+  company: string;
+  description: string;
+  link?: string;
+  date: string;
+}
+
+const { title, company, description, link, date } = Astro.props;
+---
+
+<div class="timeline-item reveal">
+  <div class="timeline-left">
+    <span class="timeline-bullet">&bull;</span>
+    <h3 class="timeline-title">{title}</h3>
+    <h4 class="timeline-company">{company}</h4>
+    <time class="timeline-date">{date}</time>
+  </div>
+
+  <div class="timeline-right">
+    <p>{description}</p>
+    {
+      link && (
+        <LinkInline href={link}>
+          Saber más
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </LinkInline>
+      )
+    }
+  </div>
+</div>
+
+<script>
+  // Animación: detecta cuando el item está visible en pantalla
+  const items = document.querySelectorAll(".reveal");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  items.forEach((item) => observer.observe(item));
+</script>

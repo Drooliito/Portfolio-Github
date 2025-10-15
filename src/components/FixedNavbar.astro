@@ -1,0 +1,88 @@
+---
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+export interface Props {
+  sections: { title: string; id: string }[];
+}
+
+const { sections } = Astro.props;
+---
+
+<nav class="fixed-navbar" id="navbar">
+  <ul class="nav-links">
+    {sections.map((section) => (
+      <li><a href={"#" + section.id} class="nav-link">{section.title}</a></li>
+    ))}
+    <li><a href="mailto:manuelguese01@gmail.com" class="nav-link">Contacto</a></li>
+    <li><ThemeToggle className="ml-auto nav-link" /></li>
+  </ul>
+</nav>
+
+<style>
+  .fixed-navbar {
+    position: fixed;
+    top: 0; /* siempre arriba */
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card);
+    color: var(--text);
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    border-radius: 0.5rem;
+    width: fit-content;
+    height: 40px;
+  }
+
+  /* Fondo transparente cuando se hace scroll */
+  .fixed-navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.1); /* cambia según tema */
+    backdrop-filter: blur(8px); /* efecto glassmorphism */
+  }
+
+  .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 10px; /* separación entre items */
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: bold;
+  padding: 8px; /* mismo espacio en todos los lados */
+  border-radius: 6px;
+  display: flex; /* asegura buen alineado con iconos */
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+  background-color: rgba(var(--accent-rgb), 0.1);
+}
+
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navbar = document.getElementById("navbar");
+    if (!navbar) return;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  });
+</script>

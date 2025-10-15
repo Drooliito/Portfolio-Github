@@ -1,0 +1,99 @@
+---
+// Declaramos la interfaz de props con un nombre de clase opcional
+export interface Props {
+  className?: string;
+}
+const { className } = Astro.props;
+---
+
+<button id="theme-toggle" class={`${className}`} aria-label="Toggle dark mode">
+  <!-- Nuevo icono de Sol -->
+  <svg
+    class="icon sun"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+    <path d="M12 5l0 .01"></path>
+    <path d="M17 7l0 .01"></path>
+    <path d="M19 12l0 .01"></path>
+    <path d="M17 17l0 .01"></path>
+    <path d="M12 19l0 .01"></path>
+    <path d="M7 17l0 .01"></path>
+    <path d="M5 12l0 .01"></path>
+    <path d="M7 7l0 .01"></path>
+  </svg>
+
+  <!-- Nuevo icono de Luna -->
+  <svg
+    class="icon moon"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
+    ></path>
+  </svg>
+</button>
+
+<style>
+  #theme-toggle {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    color: var(--text);
+  }
+  .icon {
+    grid-area: 1/1;
+    transition: transform 0.3s ease; /* Añade una transición suave para el efecto de zoom */
+  }
+  .icon:hover {
+    transform: scale(
+      1.1
+    ); /* Aumenta el tamaño al 110% al pasar el cursor encima */
+  }
+  .light .moon,
+  .dark .sun {
+    display: none;
+  }
+</style>
+
+<script>
+  const button = document.getElementById("theme-toggle") as HTMLButtonElement;
+
+  let currentTheme =
+    localStorage.getItem("theme") ||
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+  // aplicar tema al cargar
+  document.documentElement.dataset.theme = currentTheme;
+  button.classList.add(currentTheme);
+
+  button.addEventListener("click", (event: MouseEvent) => {
+    event.preventDefault();
+    currentTheme = currentTheme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = currentTheme;
+    localStorage.setItem("theme", currentTheme);
+
+    button.classList.toggle("light", currentTheme === "light");
+    button.classList.toggle("dark", currentTheme === "dark");
+  });
+</script>
