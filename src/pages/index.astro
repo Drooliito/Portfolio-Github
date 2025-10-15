@@ -2,27 +2,34 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import FixedNavbar from '../components/FixedNavbar.astro';
+import Experience from "../components/Experience.astro"
+
 const skills = ["Flutter", "Dart", "Firebase", "Supabase", "Java", "Android Studio", "C++", "Python"];
 const projects = [
   {
     title: "Todo List App",
-    body: "Cross-platform task manager with drag-&-drop, local JSON persistence and Material You.",
+    body: "Administrador de tareas multiplataforma, persistencia utilizando JSON local.",
     tags: ["Flutter", "Dart", "Android"],
   },
   {
     title: "QR Stock ",
-    body: "Cross-platform app warehouse manager",
+    body: "Aplicación Multiplataforma de gestoría de inventarios con funciones de escaneo de codigos QR a través de la cámara del móvil.",
     tags: ["Flutter", "Dart","API", "Firebase"],
   },
   {
     title: "Simulador Mazmorra",
-    body: "Recreates turn-based combat between a group of characters and dungeon monsters.",
+    body: "Simulador de combates por turno entre una grupo de personajes y monstruos de mazmorras",
     tags: ["Java"],
   },
   {
     title: "FoodZone",
-    body: "Online store web application.",
+    body: "Aplicación web de una tienda de platos preparados.",
     tags: ["Flask", "Python", "JavaScript", "HTML", "CSS"],
+  },
+  {
+    title: "EcoServices",
+    body: "Aplicación Multiplataforma para la gestión de una empresa de plagas(Gestión de trabajos, Empleados, Materiales, Facturas automáticas).",
+    tags: ["Flutter", "Dart", "Supabase"],
   },
 ];
 ---
@@ -30,8 +37,9 @@ const projects = [
 <Layout title="Manuel Guerrero — Dev">
   <FixedNavbar sections={[
     { title: 'Home', id: 'home' },
-    { title: 'About', id: 'about' },
-    { title: 'Projects', id: 'projects' }
+    { title: 'Sobre mí', id: 'about' },
+    { title: 'Experiencia', id: 'experience' },
+    { title: 'Proyectos', id: 'projects' }
   ]} />
 
   <header id="home">
@@ -43,7 +51,7 @@ const projects = [
       style="border-radius:50%;object-fit:cover;"
     />
     <h1>Manuel Guerrero Sedeño</h1>
-    <p>Cross-platform Developer • Ceuta, Spain</p>
+    <p>Desarrollador Multiplataforma • Ceuta, España</p>
     <section id="skills" style="margin-top: 0.25rem;">
       <div class="skill-row">
         {skills.map((s) => <span class="skill-chip">{s}</span>)}
@@ -52,14 +60,16 @@ const projects = [
   </header>
 
   <section id="about">
-    <h2>About me</h2>
+    <h2>Sobre mí</h2>
     <p>
-      I’m 24, finishing my <strong>Higher Technician in Multi-Platform App Development</strong> and I’ve already shipped production Android apps using Flutter, Firebase & Supabase. Self-learner, team player and always looking for the next challenge.
+      Soy un programador multiplataforma de 24 años, apasionado por crear aplicaciones eficientes y centradas en el usuario.
+      He desarrollado y publicado aplicaciones móviles y de escritorio, utilizando tecnologías como Flutter, Firebase y Supabase.
+      Soy autodidacta, colaborativo y siempre busco nuevos desafíos que me permitan seguir creciendo y crear soluciones digitales con impacto.
     </p>
   </section>
-
+  <Experience />
   <section id="projects">
-    <h2>Projects</h2>
+    <h2>Proyectos</h2>
     <div class="grid">
       {
         projects.map((p) => (

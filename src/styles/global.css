@@ -3,8 +3,8 @@
   --text: #111;
   --accent: #1e90ff;
   --card: #ffffff;
-  --tag-bg: #e0e0e0e0; /* Fondo para las etiquetas en modo claro */
-  --tag-text: #333; /* Texto para las etiquetas en modo claro */
+  --tag-bg: #e0e0e0e0;
+  --tag-text: #333;
 }
 
 [data-theme="dark"] {
@@ -12,8 +12,8 @@
   --text: #eee;
   --accent: #66b3ff;
   --card: #1e1e1e;
-  --tag-bg: #333; /* Fondo para las etiquetas en modo oscuro */
-  --tag-text: #ddd; /* Texto para las etiquetas en modo oscuro */
+  --tag-bg: #333;
+  --tag-text: #ddd;
 }
 
 html {
@@ -97,8 +97,134 @@ footer {
   background: var(--tag-bg);
   color: var(--tag-text);
   padding: 0.25rem 0.6rem;
-  border-radius: 0.5rem; /* Redondea las esquinas */
+  border-radius: 0.5rem;
   margin-right: 0.5rem;
   font-size: 0.875rem;
   margin-top: 0.35rem;
+}
+
+/* ---------------- Timeline / Experiencia ---------------- */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+  margin-top: 2rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #facc15;
+  opacity: 0.5;
+  border-radius: 2px;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+  padding: 1rem 0;
+  margin-left: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.timeline-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-left {
+  min-width: 150px;
+  position: relative;
+}
+
+.timeline-bullet {
+  position: absolute;
+  left: -1.1rem;
+  top: 0;
+  font-size: 1.5rem;
+  color: #facc15;
+}
+
+.timeline-title {
+  margin: 0;
+  font-weight: bold;
+  color: #facc15;
+}
+
+.timeline-company {
+  margin: 0.2rem 0;
+  font-weight: 600;
+  color: #374151;
+}
+
+.timeline-date {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.timeline-right {
+  flex: 1;
+  color: #111;
+}
+
+.timeline-right p {
+  margin: 0 0 0.5rem 0;
+}
+
+.timeline-right a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.timeline-right a svg {
+  stroke: currentColor;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .timeline-item {
+    flex-direction: column;
+    border-left: none;
+    border-top: 2px solid #ccc;
+    padding-left: 0;
+    padding-top: 1.5rem;
+    margin-left: 0;
+  }
+
+  .timeline-left {
+    min-width: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-bullet {
+    position: relative;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+}
+
+/* --- Dark mode tweaks --- */
+[data-theme="dark"] .timeline-item {
+  border-left-color: #555;
+}
+
+[data-theme="dark"] .timeline-left h3 {
+  color: #facc15;
+}
+
+[data-theme="dark"] .timeline-left h4,
+[data-theme="dark"] .timeline-left time {
+  color: #eee;
 }
