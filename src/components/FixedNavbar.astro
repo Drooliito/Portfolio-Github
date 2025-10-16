@@ -14,62 +14,83 @@ const { sections } = Astro.props;
       <li><a href={"#" + section.id} class="nav-link">{section.title}</a></li>
     ))}
     <li><a href="mailto:manuelguese01@gmail.com" class="nav-link">Contacto</a></li>
-    <li><ThemeToggle className="ml-auto nav-link" /></li>
+    <li><ThemeToggle className="nav-link" /></li>
   </ul>
 </nav>
 
 <style>
   .fixed-navbar {
     position: fixed;
-    top: 0; /* siempre arriba */
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     background: var(--card);
     color: var(--text);
     padding: 5px 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: background-color 0.3s ease;
     border-radius: 0.5rem;
-    width: fit-content;
-    height: 40px;
+    width: 90%;
+    max-width: 600px;
+    min-height: 40px;
   }
 
-  /* Fondo transparente cuando se hace scroll */
   .fixed-navbar.scrolled {
-    background-color: rgba(255, 255, 255, 0.1); /* cambia según tema */
-    backdrop-filter: blur(8px); /* efecto glassmorphism */
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
   }
 
   .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 10px; /* separación entre items */
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
 
-.nav-link {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: bold;
-  padding: 8px; /* mismo espacio en todos los lados */
-  border-radius: 6px;
-  display: flex; /* asegura buen alineado con iconos */
-  align-items: center;
-  justify-content: center;
-  transition: color 0.3s, background-color 0.3s;
-}
+  .nav-link {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: bold;
+    padding: 6px 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s, background-color 0.3s;
+    font-size: 0.9rem;
+  }
 
-.nav-link:hover {
-  color: var(--accent);
-  background-color: rgba(var(--accent-rgb), 0.1);
-}
+  .nav-link:hover {
+    color: var(--accent);
+    background-color: rgba(var(--accent-rgb), 0.1);
+  }
 
+  @media (max-width: 480px) {
+    .fixed-navbar {
+      width: 100%;
+      border-radius: 0;
+      left: 0;
+      transform: none;
+      padding: 5px;
+    }
+
+    .nav-links {
+      gap: 4px;
+    }
+
+    .nav-link {
+      font-size: 0.75rem;
+      padding: 4px 6px;
+    }
+  }
 </style>
 
 <script>
@@ -78,11 +99,7 @@ const { sections } = Astro.props;
     if (!navbar) return;
 
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
-      }
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
     });
   });
 </script>
