@@ -170,8 +170,9 @@ footer {
 
 .timeline-right {
   flex: 1;
-  color: #111;
+  color: var(--text);
 }
+
 
 .timeline-right p {
   margin: 0 0 0.5rem 0;
